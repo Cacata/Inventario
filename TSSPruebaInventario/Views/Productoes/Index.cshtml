@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TSSPruebaInventario.Models.Producto>
+<script type="text/javascript">
+    function PSelected(id) {
+        $.get("/Productoes/Select?id=" + id, function (response) {
+            $("#ubicaciones").html(response);
+        });
+    }
+</script>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDProductoUbicacion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDProductoUbicacion)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                <a href="#" onclick="PSelected(@item.ID)">Select</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+<div id="ubicaciones">
+
+</div>
